@@ -46,6 +46,20 @@ export default class EmployeeBrowserForm extends LightningElement {
     onProjectChange(event) {
         this.selectedProjectSkillId = '';
         this.selectedProjectId = event.target.value;
+        this.notifyParent();
 
+    }
+    onProjectSkillChange(event){
+        this.selectedProjectSkillId = event.target.value;
+        this.notifyParent();
+    }
+    notifyParent() {
+        const evt = new CustomEvent('filterchange', {
+            detail: {
+                projectId: this.selectedProjectId,
+                projectSkillId: this.selectedProjectSkillId,
+            }
+        });
+        this.dispatchEvent(evt);
     }
 }

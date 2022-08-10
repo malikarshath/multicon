@@ -1,0 +1,18 @@
+<template>
+    <div class="slds-var-m-bottom_small">
+        <lightning-card title="Filter Available Employee" icon-name="utility:search">
+            <lightning-layout horizontal-align="center">
+                <lightning-layout-item padding="around-small" size="4">
+                    <lightning-combobox name="Project" label="Select project" variant="label-hidden" options={projects}
+                        value={selectedProjectId} placeholder="Select an project" onchange={onProjectChange}>
+                    </lightning-combobox>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small" size="4">
+                    <lightning-combobox name="Project Skill" label="Select Project Skill" variant="label-hidden"
+                        value={selectedProjectSkillId} placeholder="Select a Project Skill" options={projectSkills}>
+                    </lightning-combobox>
+                </lightning-layout-item>
+            </lightning-layout>
+        </lightning-card>
+    </div>
+</template>

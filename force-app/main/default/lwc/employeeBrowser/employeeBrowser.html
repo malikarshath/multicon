@@ -1,0 +1,9 @@
+<template>
+    <c-employee-browser-form></c-employee-browser-form>
+
+    <lightning-tabset variant="scoped">
+        <lightning-tab label="Gallery">
+            <c-employee-tiles employee-list={employees.data}></c-employee-tiles>
+        </lightning-tab>
+    </lightning-tabset>
+</template>

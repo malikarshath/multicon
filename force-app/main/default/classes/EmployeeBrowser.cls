@@ -34,7 +34,7 @@ public with sharing class EmployeeBrowser {
                 }
             }
             List<Employee__c> empQuery =  [SELECT Id, Name, Email__c, Contact_Number__c, Availability__c,Employee_ID__c, PhotoUrl__c FROM Employee__c WHERE Availability__c= true AND id IN :availableEmployeesSkill WITH SECURITY_ENFORCED ORDER BY Name] ;
-            
+
             return empQuery;
         }else if(String.isNotEmpty(projectId)){
             List<Employee_Skill__c> empSKill = [SELECT Id,Employee_Name__c FROM Employee_Skill__c WHERE Skill_of_Employee__c IN (SELECT Required_Skill__c FROM Project_Skill__c WHERE Project_Id__c = :projectId)];
@@ -75,7 +75,7 @@ public with sharing class EmployeeBrowser {
         
         List<Project_Assignment__c> newAssignments = new List<Project_Assignment__c>();
         newAssignments.add(new Project_Assignment__c(Employee_Name__c=employeeId,Project_Id__c=projectId,Status__c='Draft',Skill__c=skillMap.get(projectSkillId)));
-        insert newAssignments;  
+        insert newAssignments;
     }
 }
 }

@@ -1,7 +1,7 @@
 public with sharing class EmployeeBrowserForm {
     @AuraEnabled(cacheable=true)
     public static List<Project__c> getProjects() {
-        return [SELECT Id, Name FROM Project__c WHERE Stage__c = 'Draft' ORDER BY Name];
+        return [SELECT Id, Name,Project_Name__c FROM Project__c WHERE Stage__c = 'Draft' ORDER BY Name];
 
     }
     @AuraEnabled(cacheable=true)

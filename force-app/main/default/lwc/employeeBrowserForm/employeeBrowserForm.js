@@ -19,7 +19,7 @@ export default class EmployeeBrowserForm extends LightningElement {
             data.forEach(project => {
                 this.projects.push({
                     value: project.Id,
-                    label: project.Name
+                    label: project.Project_Name__c
                 });
             });
 

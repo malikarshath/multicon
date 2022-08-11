@@ -13,7 +13,12 @@ export default class EmployeeTile extends LightningElement {
         return this.selectedEmployeeId === this.employee.Id ? "tileSelected" : "tile";
     }
     employeeClick(){
-        alert(this.employee.Name);
+        const evt = new CustomEvent("employeeselected", {
+            bubbles: true,
+            composed: true,
+            detail: { employeeId: this.employee.Id }
+        });
+        this.dispatchEvent(evt);
     }
 
 }

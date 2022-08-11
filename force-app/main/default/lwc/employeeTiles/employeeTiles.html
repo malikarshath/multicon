@@ -3,7 +3,7 @@
 		<template for:each={employeeList} for:item="employee">
 			<lightning-layout-item padding="around-small" size="6" small-device-size="6" medium-device-size="4"
 				large-device-size="3" key={employee.Id}>
-				<c-employee-tile is-selected employee={employee}>
+				<c-employee-tile is-selected employee={employee} selected-employee-id={selectedEmployeeId} onemployeeselected={handleEmployeeSelected}>
 				</c-employee-tile>
 			</lightning-layout-item>
 		</template>

@@ -9,6 +9,14 @@
 	display: inline-block;
 	cursor: pointer;
 }
+.tileSelected {
+	width: 128px;
+	height: 128px;
+	padding: 1px;
+	display: inline-block;
+	cursor: pointer;
+	border: 3px solid rgb(0, 112, 210);
+}
 
 .innertile {
 	background-size: cover;

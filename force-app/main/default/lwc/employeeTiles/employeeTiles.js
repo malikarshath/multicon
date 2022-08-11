@@ -6,7 +6,7 @@ export default class EmployeeTiles extends LightningElement {
     handleEmployeeSelected(event){
         this.selectedEmployeeId=event.detail.employeeId;
     }
-    @api setSelectedStudent(employeeId) {
-		this.selectedEmployeeId = employeeId;
+    @api setSelectedEmployee(employeeId) {
+        this.selectedEmployeeId = employeeId;
 	}
 }

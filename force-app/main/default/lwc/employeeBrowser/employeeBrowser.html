@@ -1,9 +1,12 @@
 <template>
     <c-employee-browser-form onfilterchange={handleFilterChange}></c-employee-browser-form>
-
+<lightning-card variant="scoped">
+    <lightning-button variant="brand" label="Assign Project" title="Primary action" onclick={handleClick} class="slds-m-left_x-small"
+        slot="actions"></lightning-button>
     <lightning-tabset variant="scoped">
-        <lightning-tab label="Gallery">
-            <c-employee-tiles employee-list={employees.data}></c-employee-tiles>
+        <lightning-tab label="Gallery"> 
+            <c-employee-tiles employee-list={employees.data} onemployeeselected={handleEmployeeSelected}></c-employee-tiles>
         </lightning-tab>
     </lightning-tabset>
+    </lightning-card>
 </template>

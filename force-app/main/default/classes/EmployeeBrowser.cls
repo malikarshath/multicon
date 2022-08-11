@@ -30,8 +30,21 @@ public with sharing class EmployeeBrowser {
         }
         query += ' WITH SECURITY_ENFORCED ';
         query += 'ORDER BY Name';
-		system.debug(query);
-        
         return Database.query(query);
     }
+
+    @AuraEnabled
+    public static void createProjectAssignment(string projectId,string projectSkillId,string employeeId ){
+    if(String.isNotEmpty(employeeId) && String.isNotEmpty(projectSkillId)){
+        List<Project_Skill__c> skills = [SELECT Id,Required_Skill__r.Name FROM Project_Skill__c];
+        Map<String,String> skillMap= new Map<String,String>();
+        for(Project_Skill__c skill : skills){
+            skillMap.put(skill.Id,skill.Required_Skill__r.Name);
+        }
+        
+        List<Project_Assignment__c> newAssignments = new List<Project_Assignment__c>();
+        newAssignments.add(new Project_Assignment__c(Employee_Name__c=employeeId,Project_Id__c=projectId,Status__c='Draft',Skill__c=skillMap.get(projectSkillId)));
+        insert newAssignments;  
+    }
+}
 }

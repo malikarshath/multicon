@@ -11,13 +11,14 @@ public with sharing class opportunityStageTriggerHelper {
 
         for (Opportunity opportunity : opportunities){
             if (opportunity.StageName == 'Proposal/Price Quote' && oldMap.get(opportunity.Id).StageName != opportunity.StageName){
-                Project__c project = new Project__c (Account__c=opportunity.AccountId,Budget__c=opportunity.Amount,Project_Name__c=opportunity.Name,Stage__c='Draft',Start_Date__c=system.today());
+                Project__c project = new Project__c (Account__c=opportunity.AccountId,Opportunity__c=opportunity.Id,Budget__c=opportunity.Amount,Project_Name__c=opportunity.Name,Stage__c='Draft',Start_Date__c=opportunity.Tentative_Project_Start_Date__c);
                 projects.add(project);
             }
             else if (opportunity.StageName == 'Closed/Won' && oldMap.get(opportunity.Id).StageName != opportunity.StageName){
                 for (Project__c oldProject : oldProjects){
                     if(oldProject.Project_Name__c==opportunity.Name && oldProject.Account__c==opportunity.AccountId ){
                         oldProject.Stage__c = 'Initiated';
+                        oldProject.Start_Date__c=system.today();
                     }
                 }
                 

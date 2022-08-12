@@ -23,7 +23,7 @@ public with sharing class opportunityStageTriggerHelper {
                 }
                 
             }
-            else if (opportunity.StageName == 'Closed/Won' && oldMap.get(opportunity.Id).StageName != opportunity.StageName){
+            else if (opportunity.StageName == 'Closed/Lost' && oldMap.get(opportunity.Id).StageName != opportunity.StageName){
                 for (Project__c oldProject : oldProjects){
                     if(oldProject.Project_Name__c==opportunity.Name && oldProject.Account__c==opportunity.AccountId ){
                         oldProject.Stage__c = 'Cancelled';
@@ -33,7 +33,7 @@ public with sharing class opportunityStageTriggerHelper {
             }
         }
         insert projects;
-        update oldProjects; 
+        Database.update(oldProjects,false) ; 
 
         Map<String,Id> projectSkillMap = new Map<String,Id>();
         for (Project__c projectSkill : [SELECT Id,Project_Name__c FROM Project__c ]){

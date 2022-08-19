@@ -6,7 +6,6 @@ public with sharing class EmployeeBrowser {
         Map<String,String> projectWithSkill = new Map<String,String>();
         Map<String,String> projectSkillWithProject = new Map<String,String>();
         
-        query += 'SELECT Id, Name, Email__c, Contact_Number__c, Availability__c,Employee_ID__c,PhotoUrl__c  FROM Employee__c where Availability__c= true';
         
         if(String.isNotEmpty(projectSkillId)){
             

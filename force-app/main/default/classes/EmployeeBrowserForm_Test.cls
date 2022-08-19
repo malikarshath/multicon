@@ -25,9 +25,9 @@ private class EmployeeBrowserForm_Test {
         Test.stopTest();
 
 
-        System.assertEquals(1, projects.size(),'ERROR: Expected only 49 records');
+        System.assertEquals(1, projects.size(),'ERROR: Expected only 1 records');
         System.assertEquals(0, emp.size(),'ERROR: Expected null records');
-        System.assertEquals(1, emp1.size(),'ERROR: Expected only 4 records');
+        System.assertEquals(1, emp1.size(),'ERROR: Expected only 1 records');
 
     }
 }

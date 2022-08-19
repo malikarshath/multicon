@@ -58,9 +58,8 @@ public with sharing class EmployeeBrowser {
 			
 			return empQuery;
         }
-        query += '';
-        query += 'ORDER BY Name';
-        return Database.query(query);
+        List<Employee__c> empQuery = [SELECT Id, Name, Email__c, Contact_Number__c, Availability__c,Employee_ID__c,PhotoUrl__c  FROM Employee__c where Availability__c= true ORDER BY Name];
+        return empQuery;
     }
 
     @AuraEnabled

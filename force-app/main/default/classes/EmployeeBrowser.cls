@@ -33,7 +33,7 @@ public with sharing class EmployeeBrowser {
                     availableEmployeesSkill.add(checkAvailability);
                 }
             }
-            List<Employee__c> empQuery =  [SELECT Id, Name, Email__c, Contact_Number__c, Availability__c,Employee_ID__c, PhotoUrl__c FROM Employee__c WHERE Availability__c= true AND id IN :availableEmployeesSkill WITH SECURITY_ENFORCED ORDER BY Name] ;
+            List<Employee__c> empQuery =  [SELECT Id, Name, Email__c, Contact_Number__c, Availability__c,Employee_ID__c, PhotoUrl__c FROM Employee__c WHERE Availability__c= true AND id IN :availableEmployeesSkill ORDER BY Name] ;
 
             return empQuery;
         }else if(String.isNotEmpty(projectId)){
@@ -54,12 +54,11 @@ public with sharing class EmployeeBrowser {
                     availableEmployees.add(checkAvailability);
                 }
             }
-            //query =  'SELECT Id, Name, Email__c, Contact_Number__c, Availability__c,Employee_ID__c,PhotoUrl__c  FROM Employee__c where Availability__c= true AND Id IN :'+empSkillMap.keySet();
-			List<Employee__c> empQuery = [SELECT Id, Name, Email__c, Contact_Number__c, Availability__c,Employee_ID__c,PhotoUrl__c  FROM Employee__c where Availability__c= true AND Id IN :availableEmployees  WITH SECURITY_ENFORCED ORDER BY Name];
+			List<Employee__c> empQuery = [SELECT Id, Name, Email__c, Contact_Number__c, Availability__c,Employee_ID__c,PhotoUrl__c  FROM Employee__c where Availability__c= true AND Id IN :availableEmployees ORDER BY Name];
 			
 			return empQuery;
         }
-        query += ' WITH SECURITY_ENFORCED ';
+        query += '';
         query += 'ORDER BY Name';
         return Database.query(query);
     }

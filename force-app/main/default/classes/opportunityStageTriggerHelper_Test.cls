@@ -45,6 +45,59 @@ private class opportunityStageTriggerHelper_Test {
         System.assertEquals(3, proSkill.size(),'ERROR: Expected only 3 records');
        
     }
+    @isTest
+    static void opportunityStageTriggerHelper_Test2() {
+
+        List<Opportunity> opportunities = new List<Opportunity>();
+        Map<Id,Opportunity> oldMap = new Map<Id,Opportunity>();
+
+        Skill__c skill = new Skill__c(Name='JavaScript');
+        insert skill;
+
+        Employee__c emp = new Employee__c(Name='Erik Marsh',Email__c='emarsh@multicon.com',Proof_ID_Type__c='Aadhar Number',Employee_ID__c=53006,ID_Number__c='123412341234',Contact_Number__c='6326330181',Availability__c=True);
+        insert emp;
+
+        Employee_Skill__c empSkill = new Employee_Skill__c(Employee_Name__c=emp.Id,Skill_of_Employee__c=skill.Id);
+        insert empSkill;
+        
+
+
+        Account acct2 = new Account(Name='Test Account2',organization_Email__c='test2@gmail.com');
+        insert acct2;
+
+        Opportunity oppo2 = new Opportunity(AccountId=acct2.Id,StageName='Proposal/Price Quote',Required_Skills__c='JavaScript',RecordTypeId='0120w000000EpZIAA0',CloseDate=date.valueOf('2022-08-31'),Amount=3000000.00,Duration__c=120,Name='Test oppo',No_of_Required_Employees__c=1);
+        insert oppo2;
+        
+
+        Project__c testProject1 = new Project__c (Project_Name__c = oppo2.Name,Stage__c = 'Draft',Account__c=acct2.Id,Opportunity__c=oppo2.Id,Start_Date__c=date.valueOf('2022-08-31'),Budget__c=oppo2.Amount,Duration_days__c=oppo2.Duration__c);
+        insert testProject1;
+
+        Project_Skill__c proSkill = new Project_Skill__c (Name='Test SKill2',Required_Skill__c=skill.Id, Project_Id__c=testProject1.Id);
+        insert proSkill;
+
+        Project_Assignment__c proAssi = new Project_Assignment__c(Project_Id__c=testProject1.Id,Status__c='Draft',Employee_Name__c=emp.Id,Skill__c=skill.Id);
+        insert proAssi;
+
+        oppo2.Project__c = testProject1.Id;
+        oppo2.StageName='Negotiation';
+        update oppo2;
+        oldMap.put(oppo2.Id,oppo2);
+        
+        
+        oppo2.StageName='Closed/Won';
+        update oppo2;
+        opportunities.add(oppo2);
+
+        Test.startTest();
+        opportunityStageTriggerHelper.opportunityStageTriggerHelper(opportunities,oldMap);
+        List<Project__c> project = [SELECT Id,Account__c,Opportunity__c,Budget__c,Project_Name__c,Stage__c,Start_Date__c,Duration_days__c FROM Project__c ];
+        Test.stopTest();
+
+        System.assertEquals(system.today(), project[0].Start_Date__c,'ERROR: Expected same date');
+        System.assertEquals('Initiated', project[0].Stage__c,'ERROR: Expected same stage');
+        
+        
+    }
     
      @isTest
     static void opportunityStageTriggerHelper_Test3() {
